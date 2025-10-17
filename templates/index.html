@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraper520 Posts</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Scraper520 Posts</h1>
+    {% if posts %}
+    <table>
+        <thead>
+            <tr>
+                <th>標題</th>
+                <th>作者</th>
+                <th>發布日期</th>
+                <th>標籤</th>
+                <th>縮圖</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td><a href="{{ post.url }}">{{ post.title }}</a></td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.post_date }}</td>
+                <td>{{ post.tag }}</td>
+                <td>{% if post.thumbnail %}<img src="{{ url_for('thumbnail', post_id=post.id) }}" alt="Thumbnail" width="100">{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>目前沒有可顯示的貼文。</p>
+    {% endif %}
+</body>
+</html>
